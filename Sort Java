@@ -1,0 +1,167 @@
+public class Main {
+
+    public static void main(String[] args) {
+         Integer[] num = {453,707,342,305,535,198,25,7,930,588,118,310,333,8,365,
+                 167,871,856,682,447,816,865,273,204,627,2,427,415,149,72,983,271,833,512,855 };
+        // insertionSort(num);
+        //shellSort(num);
+        //heapsort(num);
+        //mergeSort(num);
+        quickSort(num);
+         for(int i  = 0;i<num.length;i++){
+             System.out.print(num[i]+" ");
+         }
+
+    }
+    /**
+     *
+     * 插入排序
+     */
+    public static <T extends Comparable<? super T  >> void insertionSort(T []a){
+        int j;
+        for(int i = 1;i<a.length;i++){
+            T temp = a[i];
+            for(j = i;j>0&&temp.compareTo(a[j-1])<0;j--){
+                a[j] = a[ j -1 ];
+            }
+            a[j] = temp;
+        }
+    }
+
+    /**
+     * 希尔排序
+     */
+    public static <T extends Comparable<? super T  >> void shellSort(T []a){
+        int j;
+        for(int gap = a.length/2;gap>0;gap/=2){
+            for(int i = gap;i<a.length;i++) {
+                T temp = a[i];
+                for (j = i; j >=gap && temp.compareTo(a[j - gap]) < 0; j -= gap) {
+                    a[j] = a[j - gap];
+                }
+                a[j] = temp;
+            }
+        }
+    }
+
+    /**
+     * 堆排序
+     */
+
+    public static <T extends Comparable<? super T  >> void adjustDownToUp(T []a,int i,int n){
+               int child;
+               T temp;
+               for(temp=a[i]; 2*i+1<n; i=child){
+                       child = i*2+1;
+                       if(child!=n-1 &&a[child].compareTo(a[child+1])<0){  //
+                              child++;
+                           }
+                       if(temp.compareTo(a[child])<0){
+                          a[i] = a[child];
+                       }else{
+                           break;
+                       }
+               }
+                a[i] = temp;
+    }
+    public static <T extends Comparable<? super T  >> void heapsort(T []a){
+        for(int i = a.length/2-1;i>=0;i--){
+            adjustDownToUp(a,i,a.length);                     //建堆
+        }
+        for(int i = a.length-1;i>0;i--){
+            adjustDownToUp(a,0,i);
+        }
+    }
+
+    /**
+     * 归并排序
+     */
+
+    public static<T extends Comparable<? super T  >> void merge(T[] a, T[] tempArray, int leftPos, int rightPos, int rightEnd) {
+        int leftEnd= rightPos -1;
+        int tempPos = leftPos;
+        int numElements= rightEnd - leftPos +1;
+        while(leftPos<=leftEnd && rightPos<=rightEnd){
+            if(a[leftPos].compareTo(a[rightPos])<0){
+                tempArray[tempPos++] = a[leftPos++];
+            }else{
+                tempArray[tempPos++] = a[rightPos++];
+            }
+        }
+
+        while(leftPos<=leftEnd){
+            tempArray[tempPos++] = a[leftPos++];
+        }
+
+        while(rightPos<=rightEnd){
+            tempArray[tempPos++] = a[rightPos++];
+        }
+
+        for(int i=0;i<numElements;i++,rightEnd--){
+            a[rightEnd] = tempArray[rightEnd];
+        }
+    }
+    public static <T extends Comparable<? super T  >> void mergeSort(T []a, T [] tempArray,int left,int right){
+        if(left<right){
+            int center = (left+right)/2;
+            mergeSort(a,tempArray,left,center);
+            mergeSort(a,tempArray,center+1,right);
+            merge(a,tempArray,left,center+1,right);
+        }
+    }
+
+    public static <T extends Comparable<? super T  >> void mergeSort(T []a){
+
+        T[] tempArray = (T[])new Comparable[a.length];
+        mergeSort(a,tempArray,0,a.length-1);
+
+    }
+
+    /**
+     * 快速排序
+     */
+    public static <T extends Comparable<? super T  >> int partition(T []array,int lo,int hi){
+        //三数取中
+        int mid=lo+(hi-lo)/2;
+        if(array[mid].compareTo(array[hi])>0){
+            swap(array[mid],array[hi]);
+        }
+        if(array[lo].compareTo(array[hi])>0){
+            swap(array[lo],array[hi]);
+        }
+        if(array[mid].compareTo(array[lo])>0){
+            swap(array[mid],array[lo]);
+        }
+        T key=array[lo];
+
+        while(lo<hi){
+            while(array[hi].compareTo(key)>=0&&hi>lo){
+                hi--;
+            }
+            array[lo]=array[hi];
+            while(array[lo].compareTo(key)<=0&&hi>lo){
+                lo++;
+            }
+            array[hi]=array[lo];
+        }
+        array[hi]=key;
+        return hi;
+    }
+
+    public static <T extends Comparable<? super T  >>void swap(T a,T b){
+        T temp=a;
+        a=b;
+        b=temp;
+    }
+    public static <T extends Comparable<? super T  >> void quickSort(T[] array,int lo ,int hi){
+        if(lo>=hi){
+            return ;
+        }
+        int index=partition(array,lo,hi);
+        quickSort(array,lo,index-1);
+        quickSort(array,index+1,hi);
+    }
+    public static <T extends Comparable<? super T  >> void quickSort(T[] array){
+        quickSort(array,0,array.length-1);
+    }
+}
