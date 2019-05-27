@@ -1,0 +1,42 @@
+import org.apache.commons.httpclient.*;
+
+import java.io.UnsupportedEncodingException;
+import org.apache.commons.httpclient.Header;
+import org.apache.commons.httpclient.methods.PostMethod;
+
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
+
+//网建短信通上的    短信发送类，但是发送短信很慢。。。。。
+public class SMSDemo {
+
+        public void postSMS() throws HttpException, IOException {
+            HttpClient client = new HttpClient();
+            PostMethod post = new PostMethod("http://gbk.api.smschinese.cn");
+            post.addRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=gbk");//在头文件中设置转码
+            NameValuePair[] data = {
+                    new NameValuePair("Uid", "gehulushang"),// 注册的用户名
+                    new NameValuePair("Key", "d41d8cd98f00b204e980"),// 注册成功后，登录网站后得到的密钥
+                    new NameValuePair("smsMob", "13862494265"),// 接收人的手机号码   new NameValuePair("smsText", "这是一条使用Java代码发送出去的短信!") };// 短信内容post.setRequestBody(data);
+                    new NameValuePair("smsText", "涛哥！开心每一天！这是一条来自朱剑锋的短信。。。") };
+            post.setRequestBody(data);
+            client.executeMethod(post);
+            Header[] headers = post.getResponseHeaders();
+            int statusCode = post.getStatusCode();
+            System.out.println("statusCode:" + statusCode);
+            for (Header h : headers) {
+                System.out.println(h.toString());
+            }
+            String result = new String(post.getResponseBodyAsString().getBytes("gbk"));
+            System.out.println(result); //打印返回消息状态
+            post.releaseConnection();
+
+        }
+
+
+
+
+}
+
