@@ -28,7 +28,7 @@ public class KMPmatch {
     }
 
     //优化过后的next数组求法
-    public static int[] getNext(String ps) {
+    private static int[] getNext(String ps) {
         char[] p = ps.toCharArray();
         int[] next = new int[p.length];
         next[0] = -1;
