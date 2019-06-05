@@ -1,0 +1,32 @@
+public class LSS {
+
+    public String main(String str) {
+        int len  = str.length();
+        char[] c = new char[len ];
+        int[][] dp = new int[len ][len ];
+
+        String ans = str.charAt(0)+"";
+        int L;
+
+        for(int i = 0;i<len;i++){
+            dp[i][i] = 1;
+            if(i<len - 1){
+                if(str.charAt(i)==str.charAt(i+1)){
+                    dp[i][i+1] = 1;
+                    L = 2;
+                    ans = str.substring(i,i+2);
+                }
+            }
+        }
+        for(L = 3;L<=len;L++){
+            for(int i = 0;i+L-1<len;i++){
+                int j = i+L-1;
+                if(str.charAt(i)==str.charAt(j)&&dp[i+1][j-1]==1){
+                    dp[i][j] = 1;
+                    ans = str.substring(i,L+i);
+                }
+            }
+        }
+        return ans;
+    }
+}
