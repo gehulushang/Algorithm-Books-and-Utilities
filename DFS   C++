@@ -1,0 +1,25 @@
+const int maxv = 1000;   //最大顶点数
+const int INF = 99999999;  //无穷
+
+int n, G[maxv][maxv];        // n 为顶点数
+bool vis[maxv];           // 如果顶点i已被访问，则 vis[i] = true
+ 
+void DFS(int u,int depth){
+	vis[u] = true;        //设置u已被访问
+	//如果要对u进行一些操作，可以在这里进行
+	//自u出发的能到到的分支顶点
+	for(int v = 0;v<n;v++){
+		if(vis[v]==false&&G[u][v]!=INF){       //如果v未被访问，且u可以到达v 
+			DFS(v,depth+1);         // 访问v，深度+1 
+		}
+	} 
+} 
+
+//连通分量 
+void DFSTrave(){
+	for(int u = 0;u<n;u++){
+		if(vis[u]==false){
+			DFS(u,1);            
+		}
+	}
+} 
