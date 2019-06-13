@@ -1,0 +1,49 @@
+
+
+
+
+
+//并查集典型代码
+int fa[maxn] = {0};
+
+int findFather(int x){
+	int a = x;
+	while(x!=fa[x]){
+		x = fa[x];
+	}
+	while(a!=fa[a]){
+		int z = a;
+		a = fa[a];
+		fa[z] = x;
+	}
+	return x;
+}
+
+void Union(int a,int b){
+	int faA = findFather(a);
+	int faB = findFather(b);
+	if(faA!=faB){
+		fa[faA] = faB;
+	}
+}
+
+int main(){
+	cin>>n;
+	
+	for(int i = 0;i<=maxn;i++){
+		fa[i] = i;
+	}
+	/*int id,temp;
+	for(int i = 0;i<n;i++){
+		cin>>k>>id;
+		exist[id] = true;
+		for(int j = 0;j<k-1;j++){
+			cin>>temp;
+			Union(id,temp);
+			exist[temp] = true; 
+		}
+	}
+	*/
+  
+	return 0;
+}
