@@ -2,7 +2,7 @@ const int maxv = 1000;   //最大顶点数
 const int INF = 99999999;  //无穷
 
 int n, G[maxv][maxv];        // n 为顶点数
-bool vis[maxv];           // 如果顶点i已被访问，则 vis[i] = true
+bool vis[maxv] = {false};           // 如果顶点i已被访问，则 vis[i] = true
  
 void DFS(int u,int depth){
 	vis[u] = true;        //设置u已被访问
