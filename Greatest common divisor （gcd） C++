@@ -1,0 +1,26 @@
+       
+       
+       //给出最大公约数算法，而最大公倍数可以很容易的根据最大公约数求出来
+       // the solution to the gcd was coded below and the lowest common multiple (lcm) can be obtained easily based on 
+       the gcd and the product of two Numbers
+       
+       #include <iostream>
+        using namespace std;
+
+        long long gcd(long long M,long long N){
+          long long temp;
+          while(N>0){
+            temp = M%N;
+            M = N;
+            N = temp;
+          }
+          return M;
+        } 
+
+        int main(){
+          long long a,b;
+          cin>>a>>b;
+          int ans = gcd(a,b);
+          cout<<ans<<endl;
+          return 0;
+        }
