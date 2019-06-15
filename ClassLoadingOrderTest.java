@@ -1,3 +1,6 @@
+
+//类加载顺序测试
+
 package Classloading;
 
 class Son extends ClassLoadingOrderTest.Father
