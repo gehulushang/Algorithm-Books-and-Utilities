@@ -17,6 +17,6 @@ public class LazyMode {
     }
 
     public static void main(String[] args) {
-        Mode.getInstance();
+        LazyMode.getInstance();
     }
 }
