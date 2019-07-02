@@ -2,10 +2,13 @@
 #include <algorithm>
 #include <vector>
 
+
+
+//DFS+Dijkstra
+
+
+
 using namespace std;
-
-
-
 int n, m, s, d;
 int e[510][510], dis[510], cost[510][510];
 vector<int> pre[510];
