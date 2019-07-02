@@ -11,9 +11,7 @@ Some tools code by Java for back-end development, mainly from repositories such 
 /*There are transition error in the constructors of AbstractCaptcha. Now, they have been corrected and tested without problems*/
 
 
- public AbstractCaptcha(int width, int height, int codeCount, int interfereCount) {
-        this(width, height, new RandomGenerator(codeCount), interfereCount);
-    }
+    
 
 
     /**
@@ -35,6 +33,9 @@ Some tools code by Java for back-end development, mainly from repositories such 
     }
     */
     
+    public AbstractCaptcha(int width, int height, int codeCount, int interfereCount) {
+        this(width, height, new RandomGenerator(codeCount), interfereCount);
+    }
  
     /** ShearCaptcha中构造函数原本是通过控制干扰线宽度改变干扰效果，但是，干扰线宽度变宽会导致验证码字符被盖住，于是我改了构造函数，
      *  改为通过控制干扰线条数改变干扰效果
