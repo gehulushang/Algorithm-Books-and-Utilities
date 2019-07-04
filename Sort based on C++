@@ -1,0 +1,179 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+//插入排序 
+void InsertSort(int arr[],int n){
+	for(int i = 1;i<n;i++){
+		for(int j = i;j>0;j--){
+			if(arr[j]<arr[j-1]){
+				int temp = arr[j];
+				arr[j] = arr[j-1];
+				arr[j-1] = temp;
+			}
+		}
+	}
+}
+
+//冒泡排序 
+void BubbleSort(int arr[],int n){
+	for(int i = 0;i<n-1;i++){
+		for(int j = 0;j<n-i-1;j++){
+			if(arr[j]>arr[j+1]){
+				int temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+				
+			}
+		}
+	}
+}
+
+
+//选择排序
+
+void SelectSort(int arr[],int n) {
+	for(int i = 0;i<n-1;i++){
+		for(int j = i+1;j<n;j++){
+			if(arr[j]<arr[i]){
+				int temp =arr[j];
+				arr[j] =arr[i];
+				arr[i] = temp;
+				
+			}
+		}
+	}
+}
+
+
+//希尔排序
+void ShellSort(int arr[], int len)
+{
+    
+    for(int div=len/2;div>=1;div/=2)
+        for(int k=0;k<div;++k)
+            for(int i=div+k;i<len;i+=div)
+                for(int j=i;j>k;j-=div)
+                    if(arr[j]<arr[j-div]) swap(arr[j],arr[j-div]);
+                    else break;
+                
+    return;
+}
+
+//堆排序
+/*
+大顶堆sort之后，数组为从小到大排序 
+*/ 
+//====调整=====
+void AdjustHeap(int arr[], int node, int len)  //----node为需要调整的结点编号，从0开始编号;len为堆长度 
+{
+    int index=node;
+    int child=2*index+1; //左孩子，第一个节点编号为0 
+    while(child<len)
+    {
+        //右子树 
+        if(child+1<len && arr[child]<arr[child+1])
+        {
+            child++;
+        }
+        if(arr[index]>=arr[child]) break;
+        swap(arr[index],arr[child]);
+        index=child;
+        child=2*index+1;
+    }
+}
+
+
+//====建堆=====
+void MakeHeap(int arr[], int len)
+{
+    for(int i=len/2;i>=0;--i)
+    {
+        AdjustHeap(arr, i, len);
+    }
+}
+
+//====排序=====
+void HeapSort(int arr[], int len)
+{
+    MakeHeap(arr, len);
+    for(int i=len-1;i>=0;--i)
+    {
+        swap(arr[i],arr[0]);
+        AdjustHeap(arr, 0, i);
+    }
+}
+
+//归并排序
+void  MergeArray(int* arr, int left, int mid, int right, int* temp)
+{
+    if(arr==NULL) return;
+    
+    size_t i=left,j=mid+1,k=0;
+    while(i<=mid && j<=right)
+    {
+        if(arr[i]<=arr[j])
+        {
+            temp[k++]=arr[i++];
+            continue;
+        }
+        
+        temp[k++]=arr[j++];
+    }
+    
+    while(i<=mid)
+        temp[k++]=arr[i++];
+        
+    while(j<=right)
+        temp[k++]=arr[j++];
+        
+    memcpy(&arr[left],temp,k*sizeof(int));
+        
+    return;
+}
+
+void MMergeSort(int* arr, int left, int right, int* temp)
+{
+    if(left<right)
+    {
+        size_t mid=(left+right)/2;
+        MMergeSort(arr, left, mid, temp);
+        MMergeSort(arr, mid+1,right, temp);
+        MergeArray(arr,left, mid, right, temp);
+    }
+}
+
+void MergeSort(int* h, int len)
+{
+    if(h==NULL) return;
+    if(len<=1) return;
+    int* temp=(int*)calloc(len,sizeof(int));
+    MMergeSort(h, 0, len-1, temp);
+    
+    memcpy(h,temp,sizeof(int)*len);
+    
+    free(temp);
+    
+    return;
+}
+
+
+
+int main(){
+	
+	int arr[] = {3,4,5,1,7,9,0};
+	int len = sizeof(arr)/sizeof(arr[0]);
+	
+	MergeSort(arr,len);
+	for(int i = 0;i<len;i++){
+		cout<<arr[i]<<" ";
+	}
+	
+	
+	return 0;
+}
+
+
