@@ -149,3 +149,121 @@ int main(){
 	return 0;
 }
 
+
+//已知层序和中序转前序和后序
+
+
+int sum = 0;
+vector<int> preorder, inorder, postorder, levelorder;
+
+void getpreorder(vector<int> v, int instart,int inend){
+	if(v.size() == 0){
+		return ;
+	}
+	
+	int i = 0;
+	
+	while(inorder[instart+i]!=v[0]){
+		i++;
+	}
+	
+	vector<int> v1,v2,v3;
+	for(int j = instart; j <= instart + i -1; j++){
+		v1.push_back(inorder[j]);
+	}
+	
+	for(int j = 1;j<v.size() ;j++){
+		if(find(v1.begin() ,v1.end() ,v[j])!=v1.end() ){
+			v2.push_back(v[j]);
+			 
+		}else{
+			v3.push_back(v[j]);
+			 
+		}
+	}
+	preorder.push_back(v[0]);
+	getpreorder(v2,instart,instart + i -1);
+	getpreorder(v3,instart+i+1,inend);
+}
+
+void getpostorder(vector<int> v, int instart,int inend){
+	if(instart > inend){
+		return ;
+	}
+	
+	int i = 0;
+	
+	while(inorder[instart+i]!=v[0]){
+		i++;
+	}
+	
+	vector<int> v1,v2,v3;
+	for(int j = instart; j <= instart + i -1; j++){
+		v1.push_back(inorder[j]);
+	}
+	
+	for(int j = 1;j<v.size() ;j++){
+		if(find(v1.begin() ,v1.end() ,v[j])!=v1.end() ){
+			v2.push_back(v[j]);
+			 
+		}else{
+			v3.push_back(v[j]);
+			 
+		}
+	}
+	
+	getpostorder(v2,instart,instart + i -1);
+	getpostorder(v3,instart+i+1,inend);
+	postorder.push_back(v[0]);
+}
+
+int main(){
+	int n;
+	cin>>n;
+	
+	for(int i = 0;i<n;i++){
+		int item;
+		cin>>item;
+		levelorder.push_back(item);
+	}
+	
+	for(int i = 0;i<n;i++){
+		int item;
+		cin>>item;
+		inorder.push_back(item);
+	}
+	
+	getpreorder(levelorder, 0 , n - 1);
+	getpostorder(levelorder, 0 , n - 1);
+	
+	for (int i = 0; i < preorder.size(); i++) {
+		printf("%d ", preorder[i]);
+	}
+	
+	cout << endl;
+	
+	for (int i = 0; i < postorder.size(); i++) {
+		printf("%d ", postorder[i]);
+	}
+
+	return 0;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
