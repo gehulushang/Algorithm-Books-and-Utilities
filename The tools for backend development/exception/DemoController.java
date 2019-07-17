@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * SpringBoot处理异常方式一
- * 自定义处理页面
- *
+ * SpringBoot处理异常方式一    自定义处理页面
+ *  如果使用模板引擎，需要把error.html页面放在templates目录下，
+ *   同时需要注意引入正确的thymleaf依赖
  */
 @Controller
 public class DemoController {
@@ -29,7 +29,12 @@ public class DemoController {
 
         return "index";
     }
+    /**
 
+     * SpringBoot处理异常方式二    在Controller中使用@ExceptionHandler注解处理异常
+
+     */
+    
     /**
 
      * java.lang.ArithmeticException异常处理
