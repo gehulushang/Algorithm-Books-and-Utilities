@@ -63,28 +63,4 @@ public class GlobalException {
 
     }
 
-    /*
-
-    //异常处理方式四，使用SimpleMappingExceptionResolver处理异常
-    @Bean
-
-    public SimpleMappingExceptionResolver getSimpleMappingExceptionResolver(){
-
-        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-
-        Properties mappings = new Properties();
-
-        mappings.put("java.lang.ArithmeticException", "error1");
-        mappings.put("java.lang.NullPointerException","error2");
-
-        //设置异常与视图映射信息的
-
-        resolver.setExceptionMappings(mappings);
-
-        return resolver;
-
-    }
-
-     */
-
 }
