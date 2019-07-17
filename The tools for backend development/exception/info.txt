@@ -1,1 +1,13 @@
 The methods for handling exceptions in SpringBoot
+
+
+
+
+SpringBoot中中关于异常处理的五种方式
+
+自定义处理页面
+@ExceptionHandle注解处理异常
+@ControllerAdvice和自定义处理页面
+@ExceptionHandle注解处理异常
+配置SimpleMappingExceptionResolver处理异常
+自定义HandlerExceptionResolver类处理异常
