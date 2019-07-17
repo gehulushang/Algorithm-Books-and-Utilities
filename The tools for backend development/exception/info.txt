@@ -11,3 +11,13 @@ SpringBoot中中关于异常处理的五种方式
 @ExceptionHandle注解处理异常
 配置SimpleMappingExceptionResolver处理异常
 自定义HandlerExceptionResolver类处理异常
+
+
+
+
+SpringBoot默认的处理异常的机制：
+SpringBoot默认的已经提供了一套处理异常的机制，一点三程序中出现了异常，SpringBoot会向/error的url发出请求，
+在SpringBoot中提供了一个BasicExceptionController来处理/error请求，然后跳转到默认显示异常的页面来展示异常信息。
+
+
+
