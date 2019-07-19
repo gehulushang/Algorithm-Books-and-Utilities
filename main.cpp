@@ -6,7 +6,7 @@
 #include <map>
 #include <set>
 using namespace std;
-
+//回溯算法实现
 vector<int> v;
 
 int a[1010], n, isMax = 1, isMin = 1;
