@@ -4,7 +4,7 @@
 
 using namespace std; 
 
-
+//进制转换函数
 long long convert(string n, long long radix) {    
 	long long sum = 0;    
 	int index = 0, temp = 0;    
