@@ -7,12 +7,14 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.*;
 
+
+
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
 
-
+                //用ThreadPoolExecutor的方式创建线程池
 		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(5, 6, 3,
 				TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3)
 		);
@@ -34,7 +36,7 @@ public class DemoApplication {
 
 			}
 		};
-
+                //Future取值
 		Future<String> future = threadPool.submit(callable);
 		try{
 			System.out.println(future.get());
@@ -43,7 +45,8 @@ public class DemoApplication {
 		}catch (ExecutionException ee){
 			ee.printStackTrace();
 		}
-
+		
+                //FutureTask取值
 		FutureTask<String> futureTask = new FutureTask<String>(callable1);
 		threadPool.submit(futureTask);
         try{
