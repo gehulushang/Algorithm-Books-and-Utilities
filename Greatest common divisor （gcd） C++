@@ -6,7 +6,7 @@
        
        #include <iostream>
         using namespace std;
-
+        // M,N 都为正数
         long long gcd(long long M,long long N){
           long long temp;
           while(N>0){
@@ -16,6 +16,10 @@
           }
           return M;
         } 
+        //不确定M，N正负
+        long long gcd1(long long M, long long N) {
+             return N == 0 ? abs(M) : gcd1(N, M % N);
+        }
 
         int main(){
           long long a,b;
