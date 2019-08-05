@@ -4,7 +4,7 @@
 
 using namespace std; 
 
-//进制转换函数
+//已知进制和该进制数获得十进制数
 long long convert(string n, long long radix) {    
 	long long sum = 0;    
 	int index = 0, temp = 0;    
@@ -28,6 +28,33 @@ int main(){
 }
 
 
+
+//已知十进制数获得给定进制数
+
+string func(int dec,int base){
+	string ans  = "";
+	int temp;
+	
+	while(dec>0){
+		temp = dec%base;
+		ans += to_string(temp);
+		dec = dec/base;
+		
+	}
+	return ans;
+	 
+}
+int main(){
+	
+	int decimal,base;
+	cin>>decimal>>base;
+	string ans = func(decimal,base);
+	
+	cout<<ans;
+	
+	return 0;
+	
+}
 
 
 
