@@ -1,0 +1,69 @@
+
+
+
+
+
+
+
+
+int target;
+struct node{
+	int w;
+	vector<int> child;
+	
+}; 
+vector<node> v;
+vector<int> path;
+int cmp(int a,int b){
+	return v[a].w>v[b].w;
+	
+}
+void dfs(int index,int nodeNum,int sum){
+	if(sum>target){
+		return;
+		
+	}
+	if(sum == target){
+		if(v[index].child.size()!=0){
+			return;
+			
+		}
+		for(int i = 0;i<nodeNum;i++){
+			printf("%d%c", v[path[i]].w, i != nodeNum - 1 ? ' ' : '\n');
+		}
+		return;
+		
+	}
+	for(int i = 0;i<v[index].child.size();i++){
+		int temp = v[index].child[i];
+		path[nodeNum] = temp;
+		dfs(temp,nodeNum+1,sum+v[temp].w);
+		
+	}
+	
+}
+int main(){
+	
+	int n,m,index,k;
+	cin>>n>>m>>target;
+	v.resize(n);
+	path.resize(n);
+	for(int i = 0;i<n;i++){
+		cin>>v[i].w;
+		
+	}  
+	for(int i = 0;i<m;i++){
+		cin>>index>>k;
+		v[index].child.resize(k);
+		for(int j = 0; j<k; j++){
+			cin>>v[index].child[j];
+			
+		}
+		sort(v[index].child.begin(),v[index].child.end(),cmp);
+		
+	}
+	dfs(0,1,v[0].w);
+	
+	return 0;
+	
+}
