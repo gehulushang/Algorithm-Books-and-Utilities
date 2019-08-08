@@ -1,0 +1,21 @@
+
+
+
+
+vector<int> in, level;
+void levelorder(int start,int end,int index){
+	if(start>end){
+		return ;
+	}
+	
+	int n = end - start + 1; 
+	int l = log(n+1)/log(2);              //除了最后一层的层数 
+	int leave = n - (pow(2,l)-1);         //最后一层的叶子节点数 
+	int root = start + (pow(2, l - 1) - 1) + min((int)pow(2, l - 1), leave);
+	
+	level[index] = in[root];
+	levelorder(start,root-1,2*index+1);
+	levelorder(root+1,end,2*index+2);
+	
+	
+}
