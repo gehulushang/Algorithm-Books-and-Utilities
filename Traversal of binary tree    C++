@@ -251,6 +251,23 @@ int main(){
 
 
 
+//递归遍历二叉树
+struct node{
+	int id,l,r,index,lebel;
+	
+}a[100];
+void dfs(int root,int index,int level){
+	if(a[root].l!=-1){
+		dfs(a[root].l,index*2+1,level+1);
+		
+	}
+	v.push_back({root,0,0,index,level});
+	if(a[root].r!=-1){
+		dfs(a[root].r,index*2+2,level+1);
+		
+	} 
+}
+
 
 
 
