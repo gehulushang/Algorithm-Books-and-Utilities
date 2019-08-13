@@ -4,6 +4,9 @@
 
 using namespace std; 
 
+
+
+
 //已知进制和该进制数获得十进制数
 long long convert(string n, long long radix) {    
 	long long sum = 0;    
