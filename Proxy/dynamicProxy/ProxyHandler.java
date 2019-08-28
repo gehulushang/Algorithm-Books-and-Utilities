@@ -14,6 +14,8 @@ public class ProxyHandler implements InvocationHandler {
     public ProxyHandler(Object proxied){
         this.proxied = proxied;
     }
+    
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args ) throws Throwable
     {
         //在转调具体目标对象之前，可以执行一些功能处理
