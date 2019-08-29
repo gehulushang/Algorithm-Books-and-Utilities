@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+#include <cassert>
+#include <string>
+using namespace std;
+
+
+int main(){
+
+
+
+	ofstream outfile("C:\\Users\\zjf\\Desktop\\新建文本文档.txt", ios::app);
+    ifstream infile("C:\\Users\\zjf\\Desktop\\新建文本文档 (2).txt");
+    
+	string temp;
+	 while (!infile.eof()){
+        getline(infile,temp);
+        cout<<temp<<endl;
+        outfile<<temp<<endl;
+    }
+	outfile.close();
+	infile.close();
+	return 0;
+}
+
