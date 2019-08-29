@@ -9,7 +9,9 @@ int main(){
 
 
 
-	ofstream outfile("C:\\Users\\zjf\\Desktop\\新建文本文档.txt", ios::app);
+    // ofstream 写文件流 ios::app 从文件末尾开始
+    ofstream outfile("C:\\Users\\zjf\\Desktop\\新建文本文档.txt", ios::app);
+    
     ifstream infile("C:\\Users\\zjf\\Desktop\\新建文本文档 (2).txt");
     
 	string temp;
