@@ -17,6 +17,28 @@ import java.util.Locale;
 @Configuration
 @EnableWebMvc
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
+    
+    /**
+     * 添加类型转换器和格式化器
+     * @param registry
+     */
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatterForFieldType(LocalDate.class, new USLocalDateFormatter());
+    }
+
+    /**
+     * 跨域支持
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET", "POST", "DELETE", "PUT")
+                .maxAge(3600 * 24);
+    }
 
     //注入自定义拦截器
     @Autowired
@@ -56,4 +78,27 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
         return lci;
 
     }
+    
+    
+    /**
+     *  异常处理
+     * 重写extendHandlerExceptionResolvers方法，添加异常处理对象
+     * 匿名内部类实现
+     * @param resolvers
+     *
+     */
+    @Override
+    public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        resolvers.add(new HandlerExceptionResolver() {
+            @Nullable
+            @Override
+            public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, @Nullable Object handler, Exception ex) {
+                String attributeName = Exception.class.getSimpleName().substring(0, 1).toLowerCase() + Exception.class.getSimpleName().substring(1);
+                return new ModelAndView("forward:/failure", attributeName, ex);
+            }
+        });
+    }
+    
+    
+    
 }
