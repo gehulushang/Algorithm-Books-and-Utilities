@@ -22,7 +22,7 @@ void quickSort(int a[], int m, int n)
 		quickSort(a, q + 1, n);
 	}
 }
-int partion(int a[], int low, int high)
+int partion(int arr[], int low, int high)
 {
 	 // 基准数据
         int tmp = arr[low];
