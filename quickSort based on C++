@@ -2,17 +2,49 @@
 using namespace std;
 void quickSort(int a[], int m,int n);
 int partion(int a[], int m, int n);
-int main()
-{
+
+
+// 非递归实现
+void quickSortNonRecursive(int arr[],int left,int right){
+        
+        //通过栈实现
+        stack<int> s;
+        
+        s.push(left);
+        s.push(right);
+        while(!s.empty()){
+            int rightNew=s.top();
+            s.pop();
+            int leftNew=s.top();
+            s.pop();
+            //获取排序轴索引,该索引本身不再参与排序
+            int middle=partion(arr,leftNew,rightNew);
+            if(middle-1>leftNew){
+                s.push(left);
+                s.push(middle-1);
+            }
+            if(middle+1<rightNew){
+                s.push(middle+1);
+                s.push(rightNew);
+            }
+        }
+    }
+    
+    
+int main(){
 	int a[] = { 6,1,2,7,9,3,4,5,10,8 };
 	int m = 0;
 	int n = (sizeof(a) / 4)-1;
-	quickSort(a, m,n);
+	//quickSort(a, m,n);
+	quickSortNonRecursive(a,m,n);
+	
 	for (int i = 0; i < 10; i++)
 	{
 		cout << a[i] << " ";
 	}
 }
+
+// 递归实现
 void quickSort(int a[], int m, int n)
 {
 	if (m < n)
